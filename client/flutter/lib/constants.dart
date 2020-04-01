@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Constants {
   static Color backgroundColor = Color(0xffffffff);
@@ -13,4 +16,28 @@ double contentScale(BuildContext context) {
   const tall = 896.0;
   const short = 480.0;
   return ((height - short) / (tall - short)).clamp(0.0, 1.0);
+}
+
+const imageExtensions = ["jpg", "jpeg", "png", "gif"];
+
+String i18nAsset(BuildContext context, String name, String extension) {
+  var dirName = imageExtensions.contains(extension)
+      ? "image" : extension;
+
+  var locale = Localizations.localeOf(context);
+  var lang = locale.languageCode;
+  var country = locale.countryCode;
+
+  var pathPrefix = 'assets/${dirName}/${name}_${lang}';
+
+  var path = '${pathPrefix}_${country}.${extension}';
+
+  // TODO: Cascade when the country component isn't provided
+  /*
+  if(/* resource doesn't exist */) {
+    path = '${pathPrefix}.${extension}';
+  }
+  */
+
+  return path;
 }

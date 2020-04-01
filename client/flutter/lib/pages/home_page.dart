@@ -9,7 +9,9 @@ import 'package:WHOFlutter/pages/who_myth_busters.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
+import '../constants.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,9 +43,27 @@ class _HomePageState extends State<HomePage> {
         child: SafeArea(
           child: CustomScrollView(slivers: [
             SliverAppBar(
-                expandedHeight: 110,
+                expandedHeight: 115,
                 backgroundColor: Colors.white,
-                flexibleSpace: Image.asset("assets/WHO.jpg")),
+
+                flexibleSpace:
+                Container(
+                    height: 115,
+                    padding: EdgeInsets.fromLTRB(0,0,0,15),
+
+                    child:
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                              SvgPicture.asset(
+                                i18nAsset(context, "WHO-C-H", "svg"),
+                                color:Color(0xff3b8bc4),
+                                height:100.0
+                              )
+                       ])
+                )
+            ),
             SliverStaggeredGrid.count(
               crossAxisCount: 2,
               staggeredTiles: [
@@ -57,35 +77,35 @@ class _HomePageState extends State<HomePage> {
                 PageButton(
                   Color(0xff3b8bc4),
                   S.of(context).homePagePageButtonProtectYourself,
-                  () => Navigator.of(context).push(
+                      () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (c) => ProtectYourself())),
                 ),
                 PageButton(
                   Color(0xfff6c35c),
                   S.of(context).homePagePageButtonLatestNumbers,
-                  () => Navigator.of(context).push(
+                      () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (c) => ProtectYourself())),
                 ),
                 PageButton(
                   Color(0xffbe7141),
                   S.of(context).homePagePageButtonYourQuestionsAnswered,
-                  () => Navigator.of(context).push(
+                      () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (c) => QuestionIndexPage())),
                 ),
                 PageButton(
                   Color(0xff234689),
                   S.of(context).homePagePageButtonWHOMythBusters,
-                  () => Navigator.of(context).push(
+                      () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (c) => WhoMythBusters()),
                   ),
                   description:
-                      "Learn the facts about Coronavirus and how to prevent the spread",
+                  "Learn the facts about Coronavirus and how to prevent the spread",
                   centerVertical: true,
                 ),
                 PageButton(
                   Color(0xffba4344),
                   S.of(context).homePagePageButtonTravelAdvice,
-                  () => Navigator.of(context)
+                      () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (c) => TravelAdvice())),
                   borderRadius: 50,
                   centerVertical: true,
